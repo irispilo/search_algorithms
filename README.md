@@ -1,13 +1,25 @@
 # Search Algorithms
 
-Repositorio con implementaciones sencillas de busqueda lineal y busqueda binaria, junto con pruebas automatizadas.
+Repositorio con implementaciones de búsqueda lineal y búsqueda binaria, junto con pruebas unitarias automatizadas y benchmarking.
+
+---
+
+> ###  Inicio rápido (sin entorno virtual)
+> Clona, instala dependencias y corre los tests en un solo comando:
+> ```bash
+> git clone git@github.com:irispilo/search_algorithms.git && cd search_algorithms && pip install pytest pytest-benchmark && pytest test_searching.py -v
+> ```
+
+---
 
 ## Clonar el repositorio
 
 ```bash
-git clone <URL-del-repositorio>
+git clone git@github.com:irispilo/search_algorithms.git
 cd search_algorithms
 ```
+
+---
 
 ## Preparar el entorno
 
@@ -15,32 +27,56 @@ Se recomienda usar un entorno virtual de Python:
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate
-python -m pip install --upgrade pip
-pip install pytest
 ```
+
+Activar el entorno virtual:
+
+- **Windows:**
+  ```bash
+  .venv\Scripts\activate
+  ```
+- **macOS / Linux:**
+  ```bash
+  source .venv/bin/activate
+  ```
+
+Instalar dependencias:
+
+```bash
+python -m pip install --upgrade pip
+pip install pytest pytest-benchmark
+```
+
+---
 
 ## Ejecutar el unit testing
 
-Las pruebas estan en [test_searching.py](test_searching.py) y cubren `linear_search` y `binary_search`.
+Las pruebas unitarias se encuentran en [`test_searching.py`](test_searching.py) y cubren los algoritmos `linear_search` y `binary_search` con al menos 5 escenarios cada uno.
+
+Ejecutar todas las pruebas:
 
 ```bash
-pytest
+pytest test_searching.py -v
 ```
 
-Si quieres ejecutar solo ese archivo:
-
-```bash
-pytest test_searching.py
-```
+---
 
 ## Ejecutar el benchmarking
 
-Este repositorio no incluye una herramienta de benchmarking dedicada, pero puedes comparar ambos algoritmos con `timeit` desde la raiz del proyecto:
+El benchmarking se encuentra en [`benchmarking.py`](benchmarking.py) y utiliza `pytest-benchmark` en modo `pedantic` con 5 rounds de 5 iteraciones cada uno, evaluando el peor caso (target no encontrado) en una lista de 100,000 elementos.
 
 ```bash
-python -m timeit -s "from searching import linear_search; data = list(range(10000)); target = 9999" "linear_search(data, target)"
-python -m timeit -s "from searching import binary_search; data = list(range(10000)); target = 9999" "binary_search(data, target)"
+pytest benchmarking.py -v
 ```
 
-La busqueda binaria requiere una lista ordenada; por eso en el ejemplo se usa `list(range(10000))`.
+---
+
+## Anexos
+
+### Unit Testing — Resultados
+
+![Resultados de los unit tests](Anexos/Test_searching.png)
+
+### Benchmarking — Resultados
+
+![Resultados del benchmarking](Anexos/Benchmarking.png)
